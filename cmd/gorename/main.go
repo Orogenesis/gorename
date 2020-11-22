@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 
-	"github.com/orogenesis/gorename/pkg/replacer"
+	"github.com/Orogenesis/gorename/pkg/replacer"
 )
 
 var (

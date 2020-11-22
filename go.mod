@@ -1,4 +1,4 @@
-module github.com/orogenesis/gorename
+module github.com/Orogenesis/gorename
 
 go 1.15
 
