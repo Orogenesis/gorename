@@ -54,18 +54,14 @@ func mustMatchPath(currentPath, newPath string) bool {
 		panic(err)
 	}
 
-	relativePath, err := filepath.Rel(unquotedPath, newPath)
+	path, err := filepath.Rel(unquotedPath, newPath)
 	if err != nil {
 		panic(err)
 	}
 
-	if relativePath == "." {
-		return true
+	if strings.HasPrefix(path, "..") {
+		return false
 	}
 
-	if relativePath == ".." {
-		return true
-	}
-
-	return false
+	return true
 }
