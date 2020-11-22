@@ -2,14 +2,14 @@
 
 Replace imported package name in Golang project.
 
-### Installation
+## Installation
 
 The go get command will automatically fetch the dependencies listed above, compile the binary and place it in your `$GOPATH/bin` directory.  
 ```shell script
 go get github.com/orogenesis/gorename
 ```
 
-### Usage
+## Usage
 
 ```text
 Usage:
@@ -23,7 +23,7 @@ Flags:
   -print-result     Display progress
 ```
 
-### Example
+## Example
 
 ```shell script
 gorename -path gitlab.com/orogenesis/gorename -new-path github.com/orogenesis/gorename
