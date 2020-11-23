@@ -10,9 +10,8 @@ import (
 func TestFile(t *testing.T) {
 	testsTrue := [][2]string{
 		{"github.com/stretchr/testify", "github.com/stretchr/testify"},
-		{"github.com/stretchr/testify", "github.com/stretchr/testify/assert"},
-		{"github.com/stretchr/testify", "github.com/stretchr/testify/assert/second"},
-		{"github.com/stretchr/testify", "github.com/stretchr/testify/assert/second/third"},
+		{"github.com/stretchr/testify/assert", "github.com/stretchr/testify"},
+		{"github.com/stretchr/testify/assert/modfile", "github.com/stretchr/testify"},
 	}
 
 	for _, testTrue := range testsTrue {

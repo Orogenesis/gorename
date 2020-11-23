@@ -3,7 +3,6 @@ package replacer
 import (
 	"go/token"
 	"io"
-	"path/filepath"
 	"strconv"
 	"strings"
 
@@ -57,14 +56,17 @@ func mustMatchPath(currentPath, newPath string) bool {
 		panic(err)
 	}
 
-	path, err := filepath.Rel(unquotedPath, newPath)
-	if err != nil {
-		panic(err)
+	if unquotedPath == newPath {
+		return true
 	}
 
-	if strings.HasPrefix(path, "..") {
+	if !strings.HasPrefix(unquotedPath, newPath) {
 		return false
 	}
 
-	return true
+	if unquotedPath[len(newPath)] == '/' {
+		return true
+	}
+
+	return false
 }
