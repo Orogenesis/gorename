@@ -10,6 +10,8 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/logrusorgru/aurora/v3"
+
 	"golang.org/x/mod/modfile"
 )
 
@@ -93,6 +95,10 @@ func (r *Replace) Run() error {
 func (r *Replace) renameModulePath() (err error) {
 	filePath := filepath.Join(r.opts.rootDir, "go.mod")
 	f, err := os.Open(filePath)
+	if os.IsNotExist(err) {
+		return nil
+	}
+
 	if err != nil {
 		return err
 	}
@@ -160,7 +166,7 @@ func (r *Replace) walkFn(fset *token.FileSet) filepath.WalkFunc {
 			return err
 		}
 
-		f.RewriteImport(r.prevPath, r.newPath)
+		rewrote := f.RewriteImport(r.prevPath, r.newPath)
 		var buf bytes.Buffer
 		err = f.Fprint(&buf)
 		if err != nil {
@@ -172,8 +178,8 @@ func (r *Replace) walkFn(fset *token.FileSet) filepath.WalkFunc {
 			return err
 		}
 
-		if r.opts.printResult {
-			r.opts.logf(path)
+		if r.opts.printResult && rewrote {
+			r.opts.logf("%s", aurora.Bold(aurora.White(path)).BgGreen())
 		}
 
 		return nil

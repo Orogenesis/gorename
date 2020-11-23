@@ -1,12 +1,12 @@
 # gorename
 
-Replace imported package name in Golang project.
+gorename is a tool for moving packages to the new import paths.
 
 ## Installation
 
 The go get command will automatically fetch the dependencies listed above, compile the binary and place it in your `$GOPATH/bin` directory.  
 ```shell script
-go get github.com/Orogenesis/gorename/cmd/gorename
+go get -u github.com/Orogenesis/gorename/cmd/gorename
 ```
 
 ## Usage

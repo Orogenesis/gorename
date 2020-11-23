@@ -26,17 +26,20 @@ func NewFile(fset *token.FileSet, filePath string) (*File, error) {
 	return f, nil
 }
 
-func (f *File) RewriteImport(prevPath, newPath string) {
+func (f *File) RewriteImport(prevPath, newPath string) (rewrote bool) {
 	f.Apply(func(cursor *dstutil.Cursor) bool {
 		node := cursor.Node()
 		if typedNode, ok := node.(*dst.ImportSpec); ok {
 			if mustMatchPath(typedNode.Path.Value, prevPath) {
+				rewrote = true
 				typedNode.Path.Value = strings.Replace(typedNode.Path.Value, prevPath, newPath, 1)
 			}
 		}
 
 		return true
 	})
+
+	return rewrote
 }
 
 func (f *File) Fprint(w io.Writer) error {
