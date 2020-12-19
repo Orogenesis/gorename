@@ -135,6 +135,10 @@ func (r *Replace) renameModulePath() (err error) {
 	}
 
 	outBytes, err := modFile.Format()
+	if err != nil {
+		return err
+	}
+
 	err = ioutil.WriteFile(filePath, outBytes, fi.Mode())
 	return nil
 }
